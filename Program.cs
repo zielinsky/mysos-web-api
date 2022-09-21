@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
-    options.UseSqlite(@"C:\Users\MrZ13\source\repos\mysos_web_api\Data\Database.db");
+    options.UseSqlite("Data Source=C:/Users/MrZ13/source/repos/mysos_web_api/Data/Database.db");
 });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

@@ -9,9 +9,12 @@ namespace mysos_web_api.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
-        public UserController(IUserRepository userRepository)
+        private readonly ILogger<UserController> _logger;
+
+        public UserController(IUserRepository userRepository, ILogger<UserController> logger)
         {
             _userRepository = userRepository;
+            _logger = logger;
         }
 
         [HttpPost]
@@ -19,9 +22,11 @@ namespace mysos_web_api.Controllers
         {
             if(await _userRepository.Add(user))
             {
+                _logger.LogInformation($"User successfully added");
                 return Ok();
             }
 
+            _logger.LogError("Adding user failed");
             return BadRequest();
         }
 

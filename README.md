@@ -4,6 +4,7 @@
 - .NET 6
 - ASP.NET
 - EntityFramework
+- Serilog
 
 
 

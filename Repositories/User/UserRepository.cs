@@ -22,17 +22,17 @@ namespace mysos_web_api.Repositories
 
         }
 
-        public Task<bool> Update(User user)
+        public async Task<bool> Update(User user)
         {
             throw new NotImplementedException();
         }
 
-        public User Find(int id)
+        public async Task<User?> Find(int id)
         {
-            throw new NotImplementedException();
+            return await _dbContext.FindAsync<User>(id);
         }
 
-        public List<User> GetAll()
+        public Task<List<User>> GetAll()
         {
             throw new NotImplementedException();
         }

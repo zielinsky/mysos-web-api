@@ -20,14 +20,33 @@ namespace mysos_web_api.Controllers
         [HttpPost]
         public async Task<IActionResult> AddUser(User user)
         {
-            if(await _userRepository.Add(user))
+            _logger.LogInformation("Adding user...");
+
+            if (await _userRepository.Add(user))
             {
-                _logger.LogInformation($"User successfully added");
+                _logger.LogInformation("User successfully added");
                 return Ok();
             }
 
             _logger.LogError("Adding user failed");
             return BadRequest();
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetUser([FromRoute] int id)
+        {
+            _logger.LogInformation("Finding user...");
+
+            User? user = await _userRepository.Find(id);
+            
+            if(user == null)
+            {
+                _logger.LogWarning($"User {id} not found.");
+                return NotFound();
+            }
+
+            _logger.LogInformation("User successfully found");
+            return Ok();
         }
 
     }

@@ -7,7 +7,7 @@ namespace mysos_web_api.Repositories
         Task<bool> Add(User user);
         Task<bool> Update(User user);
         Task<User?> Find(int id);
-        Task<List<User>> GetAll();
+        List<User> GetAll();
         Task<bool> Remove(int id);
         Task<bool> Update(int id);
     }

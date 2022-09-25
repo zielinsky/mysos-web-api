@@ -32,9 +32,9 @@ namespace mysos_web_api.Repositories
             return await _dbContext.FindAsync<User>(id);
         }
 
-        public Task<List<User>> GetAll()
+        public List<User> GetAll()
         {
-            throw new NotImplementedException();
+            return _dbContext.Users.ToList();
         }
 
         public Task<bool> Remove(int id)

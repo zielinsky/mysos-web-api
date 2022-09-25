@@ -35,18 +35,38 @@ namespace mysos_web_api.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUser([FromRoute] int id)
         {
-            _logger.LogInformation("Finding user...");
+            _logger.LogInformation("Getting user...");
 
             User? user = await _userRepository.Find(id);
             
             if(user == null)
             {
-                _logger.LogWarning($"User {id} not found.");
+                _logger.LogWarning($"User with id = {id} not found.");
                 return NotFound();
             }
 
             _logger.LogInformation("User successfully found");
             return Ok();
+        }
+
+        [HttpGet("GetAll")]
+        public IActionResult GetUsers()
+        {
+            _logger.LogInformation("Getting users...");
+            List<User> users;
+            try
+            {
+                _logger.LogError("Users sucessfully got");
+                users = _userRepository.GetAll();
+                return Ok(users);
+            }
+            catch
+            {
+                _logger.LogError("Error in /api/User/GetUsers");
+                users = new List<User> { };
+                return BadRequest(users);
+            }
+
         }
 
     }
